@@ -650,6 +650,7 @@ streak_{home_away}_btts_n: sequencia de jogos que o {home_away} foi ambas marcam
 
 # PROXIMAS VARIAVEIS QUE EU VOU TENTAR CRIAR
 
+    tempo de dencanso (tempo entre a partida atual e a ultima partida disputada)
     failed to score
     clean sheet
     Home advantage: https://www.soccerstats.com/table.asp?league=brazil&tid=ha

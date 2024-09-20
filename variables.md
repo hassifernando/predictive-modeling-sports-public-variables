@@ -1,94 +1,154 @@
-Dados do evento
-'Date','Home','Away','Goals_H_HT','Goals_A_HT','Goals_H_FT','Goals_A_FT',
+# Dados do evento
+
+'Date',
+
+'Home','Away',
+
+'Goals_H_HT','Goals_A_HT','Goals_H_FT','Goals_A_FT',
+
 'Odd_H_FT','Odd_D_FT','Odd_A_FT',
-'HT_Odd_Over05','HT_Odd_Under05','Odd_Over15_FT','Odd_Under15_FT','Odd_Over25_FT','Odd_Under25_FT','Odd_BTTS_Yes','Odd_BTTS_No',
+
+'HT_Odd_Over05','HT_Odd_Under05',
+
+'Odd_Over15_FT','Odd_Under15_FT',
+
+'Odd_Over25_FT','Odd_Under25_FT',
+
+'Odd_BTTS_Yes','Odd_BTTS_No',
+
 'handicap': linha handicap do jogo
+
 'handicap_home': odd handicap home
+
 'handicap_away': odd handicap away
 
 TODAS AS INFORMACOES ABAIXO CONSIDERAM APENAS O EVENTO ANTES DELE TER INICIADO, OU SEJA:
 - A POSICAO NA TABELA É A POSICAO DOS ENVOLVIDOS ANTES DO EVENTO INICIAR
 - A MEDIA DE GOLS MARCADOS, TRATA-SE DA MEDIA ANTES DO EVENTO INICIAR
 
-#power ranking: Segui esse video aqui https://www.youtube.com/watch?v=fVvF1B6sjnw para a construcao desse power ranking
+
+# power ranking: 
+Segui esse video aqui https://www.youtube.com/watch?v=fVvF1B6sjnw para a construcao desse power ranking
+
 'rank_home','rank_away','rank_home_offense','rank_away_offense','rank_home_defense','rank_away_defense' 
 
 'home_rating': rating_home_att - rating_home_def
+
 'away_rating': rating_away_att - rating_away_def
 
 'rating_home_att','rating_home_def',
+
 'rating_away_att','rating_away_def',
+
 'factor_casa','media_gols_min',
+
 'goals_h_pred','goals_a_pred',
 
 'total_rating' = df['home_rating'] + df['factor_casa'] - df['away_rating']
+
 'sald_gols_jog' = df['goals_h_pred'] - df['goals_a_pred']
 
-#posicao na tabela
+
+# posicao na tabela
 
 'home_rank_home','home_rank_away','home_rank_total',
+
 'away_rank_home','away_rank_away','away_rank_total'
 
 'dif_rank': df['home_rank_total'] - df['away_rank_total']
 
-#probabilidades
+
+# probabilidades
 'p_h', 'p_d', 'p_a': 1/Odd
 
-Media das probabilidades dos jogos em casa
+
+# Media das probabilidades dos jogos em casa
 'p_h_avg_l100', 'p_a_avg_l100',
+
 'p_h_std_l100', 'p_a_std_l100',
+
 'p_h_cv_l100', 'p_a_cv_l100',
 
-Media das probabilidades global
+
+# Media das probabilidades global
 'p_h_avg_glob_l100', 'p_a_avg_glob_l100',
+
 'p_h_std_glob_l100', 'p_a_std_glob_l100',
+
 'p_h_cv_glob_l100', 'p_a_cv_glob_l100'
 
-#INFOS DA LIGA
+# INFOS DA LIGA
 'num_games_league' : Numero de jogos que ja aconteceram no campeonato
+
 'num_times': numero de times no campeonato
+
 'num_rounds': numero de rodadas que ja ocorreram no campeonato
 
-#GOLS MARCADOS HOME OU AWAY / GLOB
+
+# GOLS MARCADOS HOME OU AWAY / GLOB
 'goals_scored_avg_{HOME_OU_AWAY}_l{JANELA_MOVEL}'
+
 'goals_scored_std_{HOME_OU_AWAY}_l{JANELA_MOVEL}'
+
 'goals_scored_cv_{HOME_OU_AWAY}_l{JANELA_MOVEL}'
+
 'goals_scored_avg_{HOME_OU_AWAY}_l{JANELA_MOVEL}_GLOB'
+
 'goals_scored_std_{HOME_OU_AWAY}_l{JANELA_MOVEL}_GLOB'
+
 'goals_scored_cv_{HOME_OU_AWAY}_l{JANELA_MOVEL}_GLOB'
 
-#gols sofridos HOME OU AWAY / GLOB
+
+# gols sofridos HOME OU AWAY / GLOB
 'goals_conceded_avg_{HOME_OU_AWAY}_l{JANELA_MOVEL}'
+
 'goals_conceded_std_{HOME_OU_AWAY}_l{JANELA_MOVEL}'
+
 'goals_conceded_cv_{HOME_OU_AWAY}_l{JANELA_MOVEL}'
+
 'goals_conceded_avg_{HOME_OU_AWAY}_l{JANELA_MOVEL}_GLOB'
+
 'goals_conceded_std_{HOME_OU_AWAY}_l{JANELA_MOVEL}_GLOB'
+
 'goals_conceded_cv_{HOME_OU_AWAY}_l{JANELA_MOVEL}_GLOB'
 
-#media de pontos HOME OU AWAY / GLOBAL
+
+# media de pontos HOME OU AWAY / GLOBAL
 '1_pts_avg_{HOME_OU_AWAY}_l{JANELA_MOVEL}'
+
 '1_pts_std_{HOME_OU_AWAY}_l{JANELA_MOVEL}'
+
 '1_pts_cv_{HOME_OU_AWAY}_l{JANELA_MOVEL}'
+
 '1_pts_avg_{HOME_OU_AWAY}_l{JANELA_MOVEL}_GLOBAL'
+
 '1_pts_std_{HOME_OU_AWAY}_l{JANELA_MOVEL}_GLOBAL'
+
 '1_pts_cv_{HOME_OU_AWAY}_l{JANELA_MOVEL}_GLOBAL'
 
-# # # # # # # # # # # # # # # # # #
-#CUSTO DO GOL 0
+# CUSTO DO GOL 0
+
 Tive que contornar e colocar com o valor 1 para o custo do gol, onde os os gols sao = 0
+
 ![image](https://github.com/user-attachments/assets/116e9262-b839-401c-b8e3-267ed1e69637)
+
 custo_gol_home: p_h/Goals_H_FT
+
 custo_gol_away: p_a/Goals_A_FT
 
-#custo do gol 1
+# CUSTO DO GOL 1
+
 df['custodogol_h_v1'] = df['Goals_H_FT'] / df['p_h']
+
 df['custodogol_a_v1'] = df['Goals_A_FT'] / df['p_a']
 
-#custo do gol 2
+# CUSTO DO GOL 2
+
 df['custodogol_h_v2'] = (df['p_h'] / 2) + (df['Goals_H_FT'] / 2)
+
 df['custodogol_a_v2'] = (df['p_a'] / 2) + (df['Goals_A_FT'] / 2)
 
-# # # # # # # # # # # # # # # # # #
+
 # VALOR DO PONTO
     """
     Descrição: A variável 'Valor do Ponto' ('VP_H' para a equipe da casa e 'VP_A' para a equipe visitante) representa o valor estimado de cada ponto conquistado por uma equipe em um determinado jogo,
@@ -111,9 +171,9 @@ df['custodogol_a_v2'] = (df['p_a'] / 2) + (df['Goals_A_FT'] / 2)
     """
 
 df['valor_do_ponto_h'] = df['pts_h'] * df['p_a']
+
 df['valor_do_ponto_a'] = df['pts_a'] * df['p_h']
 
-# # # # # # # # # # # # # # # # # #
 # CUSTO DO PONTO
     """
     Conceito:
@@ -142,9 +202,9 @@ df['valor_do_ponto_a'] = df['pts_a'] * df['p_h']
     """
 
 df['custo_do_ponto_h'] = df['pts_h'] / df['p_h']
+
 df['custo_do_ponto_a'] = df['pts_a'] / df['p_a']
 
-# # # # # # # # # # # # # # # # # #
 # VALOR DO GOL
     """
     Descrição: A variável 'Valor do Gol' ('VG_H' para a equipe da casa e 'VG_A' para a equipe visitante) representa o 
@@ -165,118 +225,147 @@ df['custo_do_ponto_a'] = df['pts_a'] / df['p_a']
     """
 
 df['valor_do_gol_h'] = df['Goals_H_FT'] * df['p_a']
+
 df['valor_do_gol_a'] = df['Goals_A_FT'] * df['p_h']
 
-# # # # # # # # # # # # # # # # # #
-#    SALDO DE GOLS
+# SALDO DE GOLS
     ################################################################################
 
     # Calcula o saldo de gols para casa e fora
 df['saldo_gols_h'] = df['Goals_H_FT'] - df['Goals_A_FT']
+
 df['saldo_gols_a'] = df['Goals_A_FT'] - df['Goals_H_FT']
 
-# # # # # # # # # # # # # # # # # #
 # Saldo de Gols Ponderado * PROBAB do time
     #################################################################################
 
     # Calcula o saldo de gols ponderado multiplicado pela probabilidade de vitória do time
 df['saldo_gols_ponderado_h_mult_prob_time'] = (df['Goals_H_FT'] - df['Goals_A_FT']) * df['p_h']
+
 df['saldo_gols_ponderado_a_mult_prob_time'] = (df['Goals_A_FT'] - df['Goals_H_FT']) * df['p_a']
 
-# # # # # # # # # # # # # # # # # #
 # Saldo de Gols Ponderado / probab do time
 
 df['saldo_gols_ponderado_h_div_prob_time'] = (df['Goals_H_FT'] - df['Goals_A_FT']) / df['p_h']
+
 df['saldo_gols_ponderado_a_div_prob_time'] = (df['Goals_A_FT'] - df['Goals_H_FT']) / df['p_a']
 
-# # # # # # # # # # # # # # # # # #
 # Saldo de Gols Ponderado / probabilidade do adversário
 df['saldo_gols_ponderado_h_div_prob_adver'] = (df['Goals_H_FT'] - df['Goals_A_FT']) / df['p_a']
+
 df['saldo_gols_ponderado_a_div_prob_adver'] = (df['Goals_A_FT'] - df['Goals_H_FT']) / df['p_h']
 
-# # # # # # # # # # # # # # # # # #
 # CUSTO DO SALDO DE GOLS
 df['custo_do_saldo_do_gol_h'] = (df['Goals_H_FT'] - df['Goals_A_FT']) / df['p_h']
+
 df['custo_do_saldo_do_gol_a'] = (df['Goals_A_FT'] - df['Goals_H_FT']) / df['p_a']
 
-# # # # # # # # # # # # # # # # # #
 # PONTOS ESPERADOS
+
 df['sum_p_mo'] = df['p_h'] + df['p_d'] + df['p_a']
+
 df['juice_mo'] = df['sum_p_mo'] - 1
+
 df['odd_h_real'] = df['Odd_H_FT'] * (df['juice_mo'] + 1)
+
 df['odd_d_real'] = df['Odd_D_FT'] * (df['juice_mo'] + 1)
+
 df['odd_a_real'] = df['Odd_A_FT'] * (df['juice_mo'] + 1)
+
 df['p_h_real'] = df.apply(lambda row: 1 / row['odd_h_real'] if row['odd_h_real'] > 0 else 0, axis=1)
+
 df['p_d_real'] = df.apply(lambda row: 1 / row['odd_d_real'] if row['odd_d_real'] > 0 else 0, axis=1)
+
 df['p_a_real'] = df.apply(lambda row: 1 / row['odd_a_real'] if row['odd_a_real'] > 0 else 0, axis=1)
+
 df['xp_points_real_home'] = (df['p_h_real'] * 3) + (df['p_d_real'] * 1)
+
 df['xp_points_real_away'] = (df['p_a_real'] * 3) + (df['p_d_real'] * 1)
 
 
-# # # # # # # # # # # # # # # # # #
 # DIFERENCA ENTRE PONTOS CONQUISTADOS X PONTOS ESPERADOS
 print('Creating variables to check the sum difference between xp points and points - HOME/AWAY ')
 df[f'{code}_dif_sum_pts_xp_pts_points_real_h_l{window}'] = df[f'1_pts_sum_h_l{window}'] - df[f'16_xp_points_real_sum_h_l{window}']
+
 df[f'{code}_dif_sum_pts_xp_pts_points_real_a_l{window}'] = df[f'1_pts_sum_a_l{window}'] - df[f'16_xp_points_real_sum_a_l{window}']
 
 print('Creating variables to check the sum difference between xp points and points - global ')
 df[f'{code}_dif_sum_pts_xp_pts_points_real_h_glob_l{window}'] = df[f'1_pts_sum_h_l{window}_glob'] - df[f'16_xp_points_real_sum_h_l{window}_glob']
+
 df[f'{code}_dif_sum_pts_xp_pts_points_real_a_glob_l{window}'] = df[f'1_pts_sum_a_l{window}_glob'] - df[f'16_xp_points_real_sum_a_l{window}_glob']
 
-#RATING OFENSIVO / DEFENSIVO
+# RATING OFENSIVO / DEFENSIVO
 https://www.youtube.com/watch?v=vg5BxFCdYnE&t=764s
 
-#MEDIA DE GOLS PONDERADA PELO TEMPO
+# MEDIA DE GOLS PONDERADA PELO TEMPO
 https://www.youtube.com/watch?v=6X7R096PXOU&t=588s
 
-# # # # # # # # # # # # # # # # # #
-PORCENTAGENS
+# PORCENTAGENS
+
 perc_{home_away}_win: % Vitorias (janela movel) considerando mando de campo
+
 perc_{home_away}_win_global: % Vitorias (janela movel) global
 
 perc_{home_away}_no_loss: % Sem derrotas (janela movel) considerando mando de campo
+
 perc_{home_away}_no_loss_global: % Sem derrotas (janela movel) global
 
 perc_{home_away}_score: % de jogos que o {home_away} marcou um gol
+
 perc_{home_away}_score_15: % de jogos que o {home_away} marcou mais que 1 gol
+
 perc_{home_away}_score_25: % de jogos que o {home_away} marcou mais que 2 gols
 
 perc_{home_away}_conceded: % de jogos que o {home_away} conceded um gol
+
 perc_{home_away}_conceded_15: % de jogos que o {home_away} conceded mais que 1 gol
+
 perc_{home_away}_conceded_25: % de jogos que o {home_away} conceded mais que 2 gols
 
 perc_{home_away}_over_15_goals_total_goals: % de jogos que o {home_away} teve um total de gols superior a 1
+
 perc_{home_away}_over_25_goals_total_goals: % de jogos que o {home_away} teve um total de gols superior a 2
 
 perc_{home_away}_under_15_goals_total_goals: % de jogos que o {home_away} teve um total de gols inferior a 2
+
 perc_{home_away}_under_25_goals_total_goals: % de jogos que o {home_away} teve um total de gols inferior a 3
 
 perc_{home_away}_btts_y: % de jogos que o {home_away} foi ambas marcam sim
+
 perc_{home_away}_btts_n: % de jogos que o {home_away} foi ambas marcam nao
 
-# # # # # # # # # # # # # # # # # #
-SEQUENCIAS
+# SEQUENCIAS
+
 streak_{HOME_OU_AWAY}_win: sequencia de vitorias em casa
+
 streak_{HOME_OU_AWAY}_win_global: sequencia de vitorias global
 
 streak_{HOME_OU_AWAY}_no_loss: sequencia de eventos sem derrota em casa
+
 streak_{HOME_OU_AWAY}_no_loss_global: sequencia de eventos sem derrota global
 
 streak_{home_away}_score: sequencia de jogos marcando 1 gol
+
 streak_{home_away}_score_15: sequencia de jogos marcando mais que 1 gol
+
 streak_{home_away}_score_25: sequencia de jogos marcando mais que 2 gols
 
 streak_{home_away}_conceded: sequencia de jogos que o {home_away} conceded um gol
+
 streak_{home_away}_conceded_15: sequencia de jogos que o {home_away} conceded mais que 1 gol
+
 streak_{home_away}_conceded_25: sequencia de jogos que o {home_away} conceded mais que 2 gols
 
 streak_{home_away}_over_15_goals_total_goals: sequencia de jogos que o {home_away} teve um total de gols superior a 1
+
 streak_{home_away}_over_25_goals_total_goals: sequencia de jogos que o {home_away} teve um total de gols superior a 2
 
 streak_{home_away}_under_15_goals_total_goals: sequencia de jogos que o {home_away} teve um total de gols inferior a 2
+
 streak_{home_away}_under_25_goals_total_goals: sequencia de jogos que o {home_away} teve um total de gols inferior a 3
 
 streak_{home_away}_btts_y: sequencia de jogos que o {home_away} foi ambas marcam sim
+
 streak_{home_away}_btts_n: sequencia de jogos que o {home_away} foi ambas marcam nao
 
 

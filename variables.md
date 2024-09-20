@@ -22,6 +22,32 @@
 
 'handicap_away': odd handicap away
 
+# NOVOS DADOS PARA FAZER SCRAPPING
+
+![image](https://github.com/user-attachments/assets/4aab64c0-f418-4640-987c-5fe3699d41bd)
+
+    Desempenho, media do time, exemplo da imagem:
+        Home: 6.7
+        Away: 7.3
+
+![image](https://github.com/user-attachments/assets/aec6fb9d-952d-45dd-bdcb-e7cdf7f59c51)
+
+    Missing Players:
+        Numero de missing players de cada time
+    Coach:
+        Nome do tecnico
+
+<img width="626" alt="image" src="https://github.com/user-attachments/assets/099a39f5-487c-42a1-9ffc-dfc2736c6631">
+
+<img width="669" alt="image" src="https://github.com/user-attachments/assets/93407a44-1061-4ee4-b2ee-1220eec68dfd">
+
+    Statistics
+
+<img width="610" alt="image" src="https://github.com/user-attachments/assets/95307a0c-1d2d-4506-9e62-22f332e9ea85">
+
+    Minuto do gol
+
+
 TODAS AS INFORMACOES ABAIXO CONSIDERAM APENAS O EVENTO ANTES DELE TER INICIADO, OU SEJA:
 - A POSICAO NA TABELA É A POSICAO DOS ENVOLVIDOS ANTES DO EVENTO INICIAR
 - A MEDIA DE GOLS MARCADOS, TRATA-SE DA MEDIA ANTES DO EVENTO INICIAR
@@ -597,4 +623,6 @@ streak_{home_away}_btts_n: sequencia de jogos que o {home_away} foi ambas marcam
     
     Criar variaveis que se relacionam, exemplo:
         Odd Home vs Media Odd_Home
+
+
 

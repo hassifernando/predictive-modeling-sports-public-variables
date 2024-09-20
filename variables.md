@@ -47,6 +47,43 @@
 
     Minuto do gol
 
+    def get_goal_minutes(id_jogo,dictionary,driver):
+        def trata_minuto(minuto):
+            minuto = minuto
+            if "'" in minuto:
+                minuto = minuto.replace("'","")
+            if ":" in minuto:
+                minuto = minuto.split(':')[0]
+            if "+" in minuto:
+                minuto = minuto.split('+')[0]
+            return int(minuto)
+        url = f'https://www.flashscore.com/match/{id_jogo}/#/match-summary/match-summary'
+        if driver.current_url != url:
+            driver.get(url)
+        try:
+            WebDriverWait(driver, 8).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'div.smv__verticalSections')))
+            soup = driver.page_source
+            soup = BeautifulSoup(driver.page_source)
+            min_goals_home = []
+            min_goals_away = []
+            try:
+                home_incidents = soup.find_all('div',{"class":['smv__homeParticipant']})
+                for i in home_incidents:
+                    if ('smv__incidentHomeScore' in str(i)) | ('footballOwnGoal-ico' in str(i)):
+                        min_goals_home.append(trata_minuto(i.find('div',{"class":['smv__timeBox']}).text))
+                dictionary['Goals_Minutes_Home'] = min_goals_home
+            except:
+                dictionary['Goals_Minutes_Home'] = min_goals_home
+            try:
+                away_incidents = soup.find_all('div',{"class":['smv__awayParticipant']})
+                for i in away_incidents:
+                    if ('smv__incidentAwayScore' in str(i)) | ('footballOwnGoal-ico' in str(i)):
+                        min_goals_away.append(trata_minuto(i.find('div',{"class":['smv__timeBox']}).text))
+                dictionary['Goals_Minutes_Away'] = min_goals_away
+            except:
+                    dictionary['Goals_Minutes_Away'] = min_goals_away
+        except:
+            pass   
 
 TODAS AS INFORMACOES ABAIXO CONSIDERAM APENAS O EVENTO ANTES DELE TER INICIADO, OU SEJA:
 - A POSICAO NA TABELA É A POSICAO DOS ENVOLVIDOS ANTES DO EVENTO INICIAR

@@ -584,3 +584,17 @@ streak_{home_away}_under_25_goals_total_goals: sequencia de jogos que o {home_aw
 streak_{home_away}_btts_y: sequencia de jogos que o {home_away} foi ambas marcam sim
 
 streak_{home_away}_btts_n: sequencia de jogos que o {home_away} foi ambas marcam nao
+
+# PROXIMAS VARIAVEIS QUE EU VOU TENTAR CRIAR
+
+    failed to score
+    clean sheet
+    Home advantage: https://www.soccerstats.com/table.asp?league=brazil&tid=ha
+    Relative form: https://www.soccerstats.com/table.asp?league=brazil&tid=re
+    Goals ranges: https://www.soccerstats.com/table.asp?league=brazil&tid=9#google_vignette
+    Relative perf: https://www.soccerstats.com/table.asp?league=brazil&tid=rp
+    Goal margins: https://www.soccerstats.com/table.asp?league=brazil&tid=e
+    
+    Criar variaveis que se relacionam, exemplo:
+        Odd Home vs Media Odd_Home
+

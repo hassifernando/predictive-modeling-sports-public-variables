@@ -132,17 +132,81 @@ Tive que contornar e colocar com o valor 1 para o custo do gol, onde os os gols 
 
 ![image](https://github.com/user-attachments/assets/116e9262-b839-401c-b8e3-267ed1e69637)
 
+    """
+    Descrição: A variável 'Custo do Gol 0' ('custo_gol_home' para a equipe da casa e 'custo_gol_away' para a equipe visitante) é uma métrica que mede a relação entre a probabilidade de vitória de uma equipe e os gols marcados. Neste caso, foi implementado um ajuste para evitar divisões por zero, definindo o valor como 1 quando o número de gols é zero.
+
+    Cálculo:
+    A fórmula do Custo do Gol 0 avalia quantas unidades de probabilidade de vitória são necessárias para a equipe marcar um gol.
+    
+    Para a equipe da casa, a fórmula é: Probabilidade de vitória da casa / Gols da casa, representada pela variável custo_gol_home.
+    Para a equipe visitante, a fórmula é: Probabilidade de vitória do visitante / Gols do visitante, representada pela variável custo_gol_away.
+    Ajuste para gols zero: Quando o número de gols é zero (Goals_H_FT ou Goals_A_FT), o valor do custo do gol é ajustado para 1, evitando problemas de divisão por zero.
+    
+    Cálculo da média móvel: Assim como nas outras métricas, a média móvel pode ser calculada para suavizar os valores ao longo do tempo. A média de 'custo_gol_home' e 'custo_gol_away' pode ser calculada com uma janela de 6 jogos, com pelo menos 4 jogos disponíveis para o cálculo.
+    
+    Desvio padrão e coeficiente de variação: O desvio padrão ('DP_custo_gol_home' e 'DP_custo_gol_away') mede a dispersão dos valores do custo do gol em relação à média móvel. O coeficiente de variação ('CV_custo_gol_home' e 'CV_custo_gol_away') é calculado dividindo o desvio padrão pela média móvel.
+    
+    Interpretação dos valores:
+    
+    Valores baixos: Indicam que a equipe está marcando gols com uma alta eficiência em relação à sua probabilidade de vitória.
+    Valores médios: Refletem uma conversão de gols razoável, com a equipe marcando um número de gols condizente com a probabilidade de vitória.
+    Valores altos: Sugerem que a equipe está tendo dificuldade em converter sua probabilidade de vitória em gols, especialmente em casos onde a probabilidade de vitória é alta, mas o número de gols marcados é baixo.
+    Importância: O 'Custo do Gol 0' é útil para avaliar a eficiência de uma equipe em transformar sua expectativa de vitória em gols efetivos. Com o ajuste para gols igual a 0, a métrica permite uma avaliação mais consistente, evitando distorções causadas por jogos sem gols. Isso fornece insights valiosos sobre a eficácia ofensiva e pode ajudar na análise de desempenho das equipes.
+    """
+
 custo_gol_home: p_h/Goals_H_FT
 
 custo_gol_away: p_a/Goals_A_FT
 
 # CUSTO DO GOL 1
+    """
+    Descrição: A variável 'Custo do Gol 1' ('custodogol_h_v1' para a equipe da casa e 'custodogol_a_v1' para a equipe visitante) é uma métrica que avalia a eficiência de uma equipe em converter suas chances em gols, levando em consideração as probabilidades de vitória associadas a essas chances.
+
+    Cálculo:
+    A fórmula do Custo do Gol 1 compara diretamente os gols marcados pela equipe com a probabilidade de vitória da própria equipe.
+    
+    Para a equipe da casa, a fórmula é: Gols da casa / Probabilidade de vitória da casa, representada pela variável custodogol_h_v1.
+    Para a equipe visitante, a fórmula é: Gols do visitante / Probabilidade de vitória do visitante, representada pela variável custodogol_a_v1.
+    Essa abordagem mede o número de gols marcados por cada unidade de probabilidade de vitória da equipe, oferecendo uma visão sobre a capacidade da equipe de transformar a expectativa de vitória em gols efetivos.
+    
+    Cálculo da média móvel: Para suavizar os valores ao longo do tempo, pode-se calcular a média móvel de 'custodogol_h_v1' e 'custodogol_a_v1'. A média móvel pode ser obtida com uma janela de 6 jogos, exigindo pelo menos 4 jogos disponíveis para o cálculo.
+    
+    Desvio padrão e coeficiente de variação: O desvio padrão ('DP_custodogol_h_v1' para a equipe da casa e 'DP_custodogol_a_v1' para a equipe visitante) mede a dispersão dos valores do custo do gol em relação à média móvel. O coeficiente de variação ('CV_custodogol_h_v1' e 'CV_custodogol_a_v1') é então calculado dividindo o desvio padrão pela média móvel, fornecendo uma medida relativa da dispersão.
+    
+    Interpretação dos valores:
+    
+    Valores baixos: Sugerem que a equipe está sendo eficiente na conversão de suas chances em gols, conseguindo marcar muitos gols em relação à sua probabilidade de vitória.
+    Valores médios: Indicam um equilíbrio razoável entre a quantidade de gols marcados e a probabilidade de vitória esperada, sem um desempenho particularmente forte ou fraco.
+    Valores altos: Sinalizam dificuldades em converter as chances de vitória em gols, sugerindo que a equipe pode estar desperdiçando oportunidades ou não sendo eficaz em capitalizar sobre sua probabilidade de vitória.
+    Importância: O 'Custo do Gol 1' ajuda a medir a eficácia ofensiva das equipes, considerando suas probabilidades de vitória e sua capacidade de converter essas probabilidades em gols. Esta métrica fornece insights sobre como as equipes estão maximizando suas oportunidades, ajudando a identificar áreas que precisam de melhorias, especialmente no aspecto ofensivo.
+    """
 
 df['custodogol_h_v1'] = df['Goals_H_FT'] / df['p_h']
 
 df['custodogol_a_v1'] = df['Goals_A_FT'] / df['p_a']
 
 # CUSTO DO GOL 2
+    """
+    Descrição: A variável 'Custo do Gol 2' ('custodogol_h_v2' para a equipe da casa e 'custodogol_a_v2' para a equipe visitante) é uma métrica alternativa que busca medir a eficiência das equipes em converter suas chances em gols, com base em uma combinação da probabilidade de vitória e o número de gols marcados.
+
+    Cálculo:
+    A métrica é calculada pela média ponderada de duas variáveis principais: a probabilidade de vitória da equipe e o número de gols marcados.
+    
+    Para a equipe da casa, a fórmula é: (Probabilidade de vitória da casa / 2) + (Gols da casa / 2), representada pela variável custodogol_h_v2.
+    Para a equipe visitante, a fórmula é: (Probabilidade de vitória do visitante / 2) + (Gols do visitante / 2), representada pela variável custodogol_a_v2.
+    Essa abordagem equilibra a probabilidade de vitória e o número de gols marcados, dando peso igual a ambos os fatores na avaliação da eficiência da equipe.
+    
+    Cálculo da média móvel: Assim como nas outras variáveis, a média móvel pode ser aplicada para suavizar os valores ao longo do tempo. A média móvel de 'custodogol_h_v2' e 'custodogol_a_v2' pode ser calculada usando uma janela de 6 jogos, exigindo pelo menos 4 jogos disponíveis para o cálculo.
+    
+    Desvio padrão e coeficiente de variação: O desvio padrão ('DP_custodogol_h_v2' para a equipe da casa e 'DP_custodogol_a_v2' para a equipe visitante) mede a dispersão dos valores em relação à média móvel. O coeficiente de variação ('CV_custodogol_h_v2' e 'CV_custodogol_a_v2') é calculado dividindo o desvio padrão pela média móvel, proporcionando uma medida relativa da dispersão.
+    
+    Interpretação dos valores:
+    
+    Valores baixos: Indicam que a equipe está convertendo suas chances em gols de forma eficiente, equilibrando bem a probabilidade de vitória e os gols marcados.
+    Valores médios: Refletem um desempenho balanceado, com a equipe convertendo suas chances em gols de maneira padrão, sem se destacar nem negativamente nem positivamente.
+    Valores altos: Sugerem dificuldades na conversão de chances em gols, mesmo com probabilidades de vitória favoráveis.
+    Importância: O 'Custo do Gol 2' oferece uma visão combinada da probabilidade de vitória e da capacidade de converter essa probabilidade em gols. Ele ajuda a identificar a eficácia ofensiva das equipes, ajustando as estratégias para maximizar o aproveitamento de suas oportunidades, tanto em termos de resultado esperado quanto de gols marcados.
+    """
 
 df['custodogol_h_v2'] = (df['p_h'] / 2) + (df['Goals_H_FT'] / 2)
 
@@ -229,38 +293,167 @@ df['valor_do_gol_h'] = df['Goals_H_FT'] * df['p_a']
 df['valor_do_gol_a'] = df['Goals_A_FT'] * df['p_h']
 
 # SALDO DE GOLS
-    ################################################################################
+    """
+    Descrição: A variável 'Saldo de Gols' ('saldo_gols_h' para a equipe da casa e 'saldo_gols_a' para a equipe visitante) representa a diferença entre os gols marcados e os gols sofridos por uma equipe em um determinado jogo. Essa métrica é útil para avaliar o desempenho geral de uma equipe em termos de eficiência ofensiva e defensiva.
 
-    # Calcula o saldo de gols para casa e fora
+    Cálculo:
+    O Saldo de Gols é calculado subtraindo os gols sofridos pelos gols marcados:
+    
+    Para a equipe da casa, a fórmula é: Gols da casa - Gols do visitante, representada pela variável saldo_gols_h.
+    Para a equipe visitante, a fórmula é: Gols do visitante - Gols da casa, representada pela variável saldo_gols_a.
+    Este cálculo mostra a diferença líquida de gols para cada equipe em uma partida, ajudando a avaliar a superioridade ou inferioridade da equipe em termos de placar.
+    
+    Interpretação dos valores:
+    
+    Valores positivos: Indicando que a equipe marcou mais gols do que sofreu, um saldo positivo reflete uma performance superior, onde a equipe dominou ofensiva e/ou defensivamente.
+    Valores negativos: Significam que a equipe sofreu mais gols do que marcou, indicando uma performance inferior.
+    Valores iguais a zero: Mostram que a equipe marcou e sofreu o mesmo número de gols, sugerindo um jogo equilibrado ou empate.
+    Importância: O 'Saldo de Gols' é uma métrica chave para avaliar o desempenho de uma equipe ao longo de uma partida ou temporada. Um saldo de gols consistentemente positivo está correlacionado com bons resultados, enquanto um saldo negativo pode indicar problemas na defesa, ataque, ou ambos. Essa métrica também é frequentemente utilizada para desempates em competições e como indicador de força relativa das equipes.
+    
+    Aplicações adicionais: O saldo de gols também pode ser analisado ao longo do tempo, utilizando médias móveis e outras técnicas de suavização para entender tendências de desempenho da equipe, tanto em jogos em casa quanto fora.
+    """
+    
 df['saldo_gols_h'] = df['Goals_H_FT'] - df['Goals_A_FT']
 
 df['saldo_gols_a'] = df['Goals_A_FT'] - df['Goals_H_FT']
 
 # Saldo de Gols Ponderado * PROBAB do time
-    #################################################################################
-
-    # Calcula o saldo de gols ponderado multiplicado pela probabilidade de vitória do time
+    """
+    Descrição: A variável 'Saldo de Gols Ponderado Multiplicado pela Probabilidade do Time' ('saldo_gols_ponderado_h_mult_prob_time' para a equipe da casa e 'saldo_gols_ponderado_a_mult_prob_time' para a equipe visitante) combina o saldo de gols de uma equipe com sua probabilidade de vitória, ponderando a diferença de gols pelo quão provável era que a equipe vencesse.
+    
+    Cálculo:
+    Essa métrica é calculada multiplicando o saldo de gols pelo valor da probabilidade de vitória:
+    
+    Para a equipe da casa, a fórmula é: (Gols da casa - Gols do visitante) * Probabilidade de vitória da casa, representada por saldo_gols_ponderado_h_mult_prob_time.
+    Para a equipe visitante, a fórmula é: (Gols do visitante - Gols da casa) * Probabilidade de vitória do visitante, representada por saldo_gols_ponderado_a_mult_prob_time.
+    Interpretação dos valores:
+    
+    Valores positivos: Um valor positivo indica que a equipe marcou mais gols do que sofreu, ponderado por sua probabilidade de vitória. Quanto maior a probabilidade de vitória e o saldo de gols, mais alto será o valor.
+    Valores negativos: Significam que a equipe sofreu mais gols do que marcou, e sua probabilidade de vitória não foi capaz de compensar essa diferença.
+    Valores próximos de zero: Indicam que a equipe teve um saldo de gols equilibrado, ou que sua probabilidade de vitória era baixa, mesmo em caso de saldo positivo.
+    Importância:
+    Essa métrica é particularmente útil para entender a performance de uma equipe em relação às expectativas de vitória. Ao ponderar o saldo de gols com a probabilidade de vitória, ela permite uma visão mais ajustada do desempenho. Por exemplo:
+    
+    Se uma equipe com alta probabilidade de vitória tem um saldo de gols negativo, isso pode indicar um desempenho abaixo do esperado.
+    Por outro lado, uma equipe com baixa probabilidade de vitória, mas com saldo de gols positivo, pode estar superando expectativas.
+    Aplicações adicionais:
+    Assim como outras métricas, essa variável pode ser usada para análise de tendências ao longo de várias partidas, utilizando médias móveis ou outras técnicas de suavização. A ponderação pelo valor da probabilidade também pode ajudar a ajustar modelos preditivos e comparações entre equipes com diferentes níveis de expectativa.
+    """
 df['saldo_gols_ponderado_h_mult_prob_time'] = (df['Goals_H_FT'] - df['Goals_A_FT']) * df['p_h']
 
 df['saldo_gols_ponderado_a_mult_prob_time'] = (df['Goals_A_FT'] - df['Goals_H_FT']) * df['p_a']
 
 # Saldo de Gols Ponderado / probab do time
+    """
+    Descrição: A variável 'Saldo de Gols Ponderado Dividido pela Probabilidade do Time' ('saldo_gols_ponderado_h_div_prob_time' para a equipe da casa e 'saldo_gols_ponderado_a_div_prob_time' para a equipe visitante) avalia o saldo de gols de uma equipe ajustado pela sua probabilidade de vitória, dividindo a diferença de gols marcados e sofridos pela probabilidade de vitória da equipe.
+    
+    Cálculo:
+    O saldo de gols é ponderado pela probabilidade de vitória, sendo ajustado para refletir a expectativa de performance:
+    
+    Para a equipe da casa, a fórmula é: (Gols da casa - Gols do visitante) / Probabilidade de vitória da casa, representada por saldo_gols_ponderado_h_div_prob_time.
+    Para a equipe visitante, a fórmula é: (Gols do visitante - Gols da casa) / Probabilidade de vitória do visitante, representada por saldo_gols_ponderado_a_div_prob_time.
+    Interpretação dos valores:
+    
+    Valores elevados: Um valor elevado indica que a equipe teve um saldo de gols positivo (ou seja, marcou mais gols do que sofreu) e uma probabilidade de vitória relativamente baixa, o que sugere um desempenho acima do esperado.
+    Valores baixos ou negativos: Um valor baixo ou negativo indica que o saldo de gols da equipe foi negativo, ou que a equipe teve um saldo positivo, mas com uma probabilidade de vitória alta, o que pode indicar que a performance foi dentro do esperado ou abaixo dele.
+    Valores próximos de zero: Sinalizam que a equipe teve um saldo de gols equilibrado em relação à sua probabilidade de vitória.
+    Importância:
+    Essa métrica oferece uma visão ajustada do desempenho de uma equipe em relação à expectativa de vitória, considerando não apenas o resultado em termos de gols, mas também o quanto esse desempenho estava alinhado (ou desalinhado) com a probabilidade de vitória. Ela é útil para identificar:
+    
+    Superações de expectativas: Quando uma equipe com baixa probabilidade de vitória consegue um bom saldo de gols.
+    Desempenhos abaixo do esperado: Quando uma equipe com alta probabilidade de vitória apresenta um saldo de gols negativo ou baixo.
+    Aplicações adicionais:
+    Esta variável pode ser usada em modelos preditivos para ajustar o desempenho relativo das equipes, e também pode ser suavizada ao longo de várias partidas por meio de médias móveis para observar tendências de performance, tanto em casa quanto fora.
+    """
 
 df['saldo_gols_ponderado_h_div_prob_time'] = (df['Goals_H_FT'] - df['Goals_A_FT']) / df['p_h']
 
 df['saldo_gols_ponderado_a_div_prob_time'] = (df['Goals_A_FT'] - df['Goals_H_FT']) / df['p_a']
 
 # Saldo de Gols Ponderado / probabilidade do adversário
+    """
+    Descrição: A variável 'Saldo de Gols Ponderado Dividido pela Probabilidade do Adversário' ('saldo_gols_ponderado_h_div_prob_adver' para a equipe da casa e 'saldo_gols_ponderado_a_div_prob_adver' para a equipe visitante) pondera o saldo de gols de uma equipe ao dividir a diferença de gols marcados e sofridos pela probabilidade de vitória do time adversário. Isso ajusta o saldo de gols pelo nível de desafio imposto pela probabilidade do oponente.
+    
+    Cálculo:
+    O saldo de gols é ajustado pela probabilidade de vitória do adversário:
+    
+    Para a equipe da casa, a fórmula é: (Gols da casa - Gols do visitante) / Probabilidade de vitória do visitante, representada por saldo_gols_ponderado_h_div_prob_adver.
+    Para a equipe visitante, a fórmula é: (Gols do visitante - Gols da casa) / Probabilidade de vitória da casa, representada por saldo_gols_ponderado_a_div_prob_adver.
+    Interpretação dos valores:
+    
+    Valores elevados: Um valor elevado indica que a equipe teve um saldo de gols positivo, mesmo enfrentando um adversário com alta probabilidade de vitória. Isso sugere que a equipe teve um bom desempenho contra um adversário teoricamente mais forte.
+    Valores baixos ou negativos: Um valor baixo ou negativo indica que a equipe teve dificuldades, apresentando um saldo de gols negativo, ou que seu desempenho foi abaixo do esperado frente a um adversário considerado mais fraco.
+    Valores próximos de zero: Apontam para uma partida equilibrada, em que o saldo de gols ajustado pelo nível de desafio do adversário resultou em um desempenho compatível com as probabilidades.
+    Importância:
+    Essa métrica permite avaliar o desempenho de uma equipe em relação à qualidade do adversário, conforme indicado pela probabilidade de vitória do oponente. É útil para:
+    
+    Identificar performances excepcionais: Quando uma equipe supera as expectativas contra um adversário difícil.
+    Avaliar desempenhos abaixo do esperado: Quando uma equipe com vantagem teórica enfrenta dificuldades contra um adversário com menor probabilidade de vitória.
+    Aplicações adicionais:
+    O uso dessa variável em análise de tendências ou modelos preditivos pode ajudar a ajustar o desempenho de equipes, levando em consideração a força do adversário. Também é possível utilizar médias móveis ou outras formas de suavização para analisar o comportamento ao longo de várias partidas.
+    """
 df['saldo_gols_ponderado_h_div_prob_adver'] = (df['Goals_H_FT'] - df['Goals_A_FT']) / df['p_a']
 
 df['saldo_gols_ponderado_a_div_prob_adver'] = (df['Goals_A_FT'] - df['Goals_H_FT']) / df['p_h']
 
 # CUSTO DO SALDO DE GOLS
+    """
+    Descrição: A variável 'Custo do Saldo de Gols' ('custo_do_saldo_do_gol_h' para a equipe da casa e 'custo_do_saldo_do_gol_a' para a equipe visitante) quantifica o saldo de gols de uma equipe em relação à sua probabilidade de vitória. Essa métrica representa o "custo" de cada gol marcado ou sofrido, ajustado pela probabilidade de vitória da equipe.
+
+    Cálculo:
+    O saldo de gols é ajustado pela probabilidade de vitória da equipe, da seguinte forma:
+    
+    Para a equipe da casa, a fórmula é: (Gols da casa - Gols do visitante) / Probabilidade de vitória da casa, representada por custo_do_saldo_do_gol_h.
+    Para a equipe visitante, a fórmula é: (Gols do visitante - Gols da casa) / Probabilidade de vitória do visitante, representada por custo_do_saldo_do_gol_a.
+    Interpretação dos valores:
+    
+    Valores elevados: Um valor elevado indica que a equipe obteve um saldo de gols positivo e ajustado para uma probabilidade de vitória relativamente baixa, sugerindo um desempenho eficiente, ou um bom saldo de gols mesmo com chances menores de vitória.
+    Valores baixos ou negativos: Um valor baixo ou negativo indica um saldo de gols negativo, ou que o saldo de gols positivo foi alcançado em um contexto de alta probabilidade de vitória, sugerindo que a equipe teve dificuldades ou performou dentro do esperado.
+    Valores próximos de zero: Indicativos de partidas equilibradas, onde o saldo de gols e a probabilidade de vitória estão em alinhamento, sem grandes discrepâncias.
+    Importância:
+    Essa métrica é útil para avaliar a eficiência das equipes ao converter sua probabilidade de vitória em saldo de gols efetivo. Pode ser aplicada para:
+    
+    Identificar a eficiência ofensiva/defensiva: Se uma equipe está convertendo bem suas chances de vitória em saldo de gols positivo.
+    Avaliar performances abaixo do esperado: Se o saldo de gols está abaixo do esperado, considerando a alta probabilidade de vitória.
+    Aplicações adicionais:
+    O 'Custo do Saldo de Gols' pode ser usado para ajustar modelos preditivos de desempenho, refletindo a capacidade de uma equipe em maximizar seu saldo de gols de acordo com suas probabilidades. Isso permite insights sobre a consistência ou vulnerabilidade de uma equipe em situações com diferentes probabilidades de vitória.
+    """
 df['custo_do_saldo_do_gol_h'] = (df['Goals_H_FT'] - df['Goals_A_FT']) / df['p_h']
 
 df['custo_do_saldo_do_gol_a'] = (df['Goals_A_FT'] - df['Goals_H_FT']) / df['p_a']
 
 # PONTOS ESPERADOS
+
+    """
+    Descrição: A variável 'Pontos Esperados' ('xp_points_real_home' para a equipe da casa e 'xp_points_real_away' para a equipe visitante) representa o número de pontos que uma equipe pode esperar conquistar com base nas probabilidades reais ajustadas pelas odds do mercado, considerando as probabilidades de vitória, empate e derrota.
+    
+    Cálculo:
+    
+    Sumário das probabilidades de mercado:
+    Inicialmente, as probabilidades de vitória da casa (p_h), empate (p_d), e vitória da visitante (p_a) são somadas para calcular sum_p_mo. A partir disso, o 'juice' de mercado (juice_mo) é determinado subtraindo 1 de sum_p_mo.
+    
+    Ajuste das odds reais:
+    As odds de vitória da casa (Odd_H_FT), empate (Odd_D_FT), e vitória da visitante (Odd_A_FT) são ajustadas pelo valor do 'juice', gerando odds reais (odd_h_real, odd_d_real, odd_a_real).
+    
+    Probabilidades reais:
+    As probabilidades reais de vitória da casa (p_h_real), empate (p_d_real), e vitória da visitante (p_a_real) são então calculadas usando o inverso das odds reais, levando em consideração um valor positivo de odds.
+    
+    Cálculo dos pontos esperados:
+    
+    Para a equipe da casa: xp_points_real_home é obtido multiplicando a probabilidade real de vitória da casa (p_h_real) por 3 pontos, somado à probabilidade real de empate (p_d_real) multiplicada por 1 ponto.
+    Para a equipe visitante: xp_points_real_away segue a mesma lógica, utilizando a probabilidade real de vitória da visitante (p_a_real) e de empate (p_d_real).
+    Interpretação dos valores:
+    
+    Pontos esperados altos: Indicativos de um cenário onde a equipe tem uma alta probabilidade de obter um bom resultado (vitória ou empate), baseado nas odds ajustadas do mercado.
+    Pontos esperados baixos: Refletem uma expectativa de desempenho inferior ou uma baixa probabilidade de conquistar pontos no jogo, de acordo com as odds de mercado ajustadas.
+    Importância:
+    Os Pontos Esperados fornecem uma estimativa mais precisa sobre o desempenho projetado de uma equipe com base nas probabilidades reais derivadas das odds ajustadas. Essa métrica é útil para:
+    
+    Avaliar a expectativa de desempenho: Comparando as odds de mercado com o desempenho real, é possível identificar se a equipe está superando ou ficando abaixo das expectativas.
+    Ajustar modelos preditivos: Incorporando essa métrica, modelos de previsão podem ser refinados para melhorar a precisão das estimativas de resultados futuros.
+    Aplicações adicionais:
+    Esta métrica pode ser usada em análises avançadas de eficiência de mercado, ajudando a determinar o quão bem as odds refletem a realidade do desempenho das equipes e permitindo a identificação de discrepâncias que possam ser exploradas em modelos de apostas ou estratégias preditivas.
+    """
 
 df['sum_p_mo'] = df['p_h'] + df['p_d'] + df['p_a']
 
@@ -284,12 +477,36 @@ df['xp_points_real_away'] = (df['p_a_real'] * 3) + (df['p_d_real'] * 1)
 
 
 # DIFERENCA ENTRE PONTOS CONQUISTADOS X PONTOS ESPERADOS
-print('Creating variables to check the sum difference between xp points and points - HOME/AWAY ')
+    """
+    Descrição: A variável 'Diferença entre Pontos Conquistados e Pontos Esperados' calcula a discrepância entre os pontos efetivamente conquistados por uma equipe e os pontos que eram esperados com base nas probabilidades ajustadas do jogo. Essa métrica é calculada separadamente para a equipe da casa e para a equipe visitante, permitindo uma análise mais detalhada do desempenho relativo.
+
+    Cálculo:
+    
+    Diferença Local:
+    
+    Para a equipe da casa: A diferença é dada pela fórmula Pontos Conquistados da Casa - Pontos Esperados da Casa, representada por dif_sum_pts_xp_pts_points_real_h_l{window}.
+    Para a equipe visitante: A fórmula é Pontos Conquistados da Visitante - Pontos Esperados da Visitante, representada por dif_sum_pts_xp_pts_points_real_a_l{window}.
+    Diferença Global:
+    
+    Para a equipe da casa: dif_sum_pts_xp_pts_points_real_h_glob_l{window} calcula a diferença entre os pontos conquistados ao longo do tempo e os pontos esperados globalmente para a casa.
+    Para a equipe visitante: dif_sum_pts_xp_pts_points_real_a_glob_l{window} calcula a diferença para a equipe visitante sob as mesmas condições.
+    Interpretação dos valores:
+    
+    Valores positivos: Indicam que a equipe superou as expectativas, conquistando mais pontos do que o esperado com base nas odds ajustadas. Isso sugere um desempenho acima do esperado.
+    Valores negativos: Indicam que a equipe não conseguiu atingir suas expectativas, conquistando menos pontos do que o previsto. Isso pode sugerir dificuldades no desempenho ou um desvio significativo entre as expectativas de desempenho e os resultados reais.
+    Valores próximos de zero: Apontam para uma correspondência próxima entre os pontos conquistados e os pontos esperados, sugerindo que a equipe está performando de acordo com as expectativas.
+    Importância:
+    Essa métrica é essencial para avaliar a eficácia de uma equipe em converter suas oportunidades em resultados reais, permitindo identificar áreas de desempenho forte ou fraco. Pode ser utilizada para:
+    
+    Análise de performance: Ajuda a avaliar se as equipes estão maximizando suas chances de conquistar pontos com base nas probabilidades do mercado.
+    Ajuste de estratégias: Identificar equipes que consistentemente superam ou ficam aquém das expectativas pode auxiliar na formulação de estratégias táticas e de treinamento.
+    Aplicações adicionais:
+    A diferença entre pontos conquistados e pontos esperados pode ser integrada em análises mais amplas de desempenho, permitindo insights sobre a eficácia do time e ajustes em modelos preditivos para resultados futuros, influenciando decisões em apostas e gestão de equipes.
+    """
 df[f'{code}_dif_sum_pts_xp_pts_points_real_h_l{window}'] = df[f'1_pts_sum_h_l{window}'] - df[f'16_xp_points_real_sum_h_l{window}']
 
 df[f'{code}_dif_sum_pts_xp_pts_points_real_a_l{window}'] = df[f'1_pts_sum_a_l{window}'] - df[f'16_xp_points_real_sum_a_l{window}']
 
-print('Creating variables to check the sum difference between xp points and points - global ')
 df[f'{code}_dif_sum_pts_xp_pts_points_real_h_glob_l{window}'] = df[f'1_pts_sum_h_l{window}_glob'] - df[f'16_xp_points_real_sum_h_l{window}_glob']
 
 df[f'{code}_dif_sum_pts_xp_pts_points_real_a_glob_l{window}'] = df[f'1_pts_sum_a_l{window}_glob'] - df[f'16_xp_points_real_sum_a_l{window}_glob']
@@ -367,5 +584,3 @@ streak_{home_away}_under_25_goals_total_goals: sequencia de jogos que o {home_aw
 streak_{home_away}_btts_y: sequencia de jogos que o {home_away} foi ambas marcam sim
 
 streak_{home_away}_btts_n: sequencia de jogos que o {home_away} foi ambas marcam nao
-
-
